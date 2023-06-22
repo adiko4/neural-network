@@ -91,21 +91,21 @@ class ArtificialNeuralNetwork:
         gradients = []
 
         dA = self._loss_function.derivative(Y, AL)
-        
+
         for current_layer, current_layer_cache in zip(reversed(self._layers), reversed(self._cache)):
             # Computing derivatives for the current layer
             dZ = dA * current_layer.activation_function.derivative(current_layer_cache.Z)
             dW = np.dot(dZ, current_layer_cache.previous_activations.T) / m
             db = np.sum(dZ, axis=1, keepdims=True) / m
-            
+
             # Inserting weights and biases gradients backwards for convinient adjustments later
             gradients.insert(0, NeuralNetworkLayerGradients(dW, db))
-            
+
             # Computing derivatives of activations one layer backwards
             dA = np.dot(current_layer.weights.T, dZ)
 
         return gradients
-    
+
     def _adjust_parameters(self, learning_rate, gradients) -> None:
         """Adjusting the weights and biases of each layer for minimizing cost function"""
         for layer, layer_gradients in zip(self._layers, gradients):
@@ -126,5 +126,5 @@ class ArtificialNeuralNetwork:
             assert layers_info[i + 1].activation_function_type is not None
 
             layers.append(NeuralNetworkLayer(weights_matrix, biases_matrix, layers_info[i + 1].activation_function_type.value))
-        
+
         return layers
