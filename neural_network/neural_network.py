@@ -49,11 +49,11 @@ class ArtificialNeuralNetwork:
         self._loss_function = loss_function
 
     def predict(self, X):
-        """This function invokes model prediction using the trained weights and biases"""
+        """Invokes model prediction using the trained weights and biases"""
         return self._forward_propagate(X)
 
     def fit(self, X, Y, learning_rate, iterations) -> List[int]:
-        """This function trains the model using the dataset and the labels"""
+        """Trains the model using batch gradient descent over the dataset"""
         cost_history = list()
         m = X.shape[1]
 
@@ -73,7 +73,7 @@ class ArtificialNeuralNetwork:
         return cost_history
 
     def _forward_propagate(self, X, store_cache=False) -> np.ndarray:
-        """Takes the inputs into the neural network and produces the predicted output weights and biases"""
+        """Progpagates the inputs through the neural network and produces the predicted output"""
         activations = X
 
         for layer in self._layers:
@@ -107,7 +107,7 @@ class ArtificialNeuralNetwork:
         return gradients
     
     def _adjust_parameters(self, learning_rate, gradients) -> None:
-        """Adjusting the weights and biases of each layer in order to minimize cost function"""
+        """Adjusting the weights and biases of each layer for minimizing cost function"""
         for layer, layer_gradients in zip(self._layers, gradients):
             layer.weights -= learning_rate * layer_gradients.dW
             layer.biases -= learning_rate * layer_gradients.db
