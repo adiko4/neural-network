@@ -1,2 +1,2 @@
-## Artificial neural network with batch gradient descent
+### Implementation of artificial neural network using numpy only
 #### By Adi Koch
