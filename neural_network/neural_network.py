@@ -6,6 +6,7 @@ from typing import List, Optional
 from .activations import ActivationFunction, ReLUActivation, SigmoidActivation
 from .loss_function import LossFunction
 
+# Note: Some variables names seem non-indicative but those are actually the common jargon in the ML world
 
 class ActivationFunctionType(Enum):
     SIGMOID = SigmoidActivation
